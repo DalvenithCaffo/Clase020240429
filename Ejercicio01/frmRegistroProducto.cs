@@ -12,11 +12,30 @@ namespace Ejercicio01
 {
     public partial class frmRegistroProducto : Form
     {
+        List<Producto> listaProductos = new List<Producto>();
         public frmRegistroProducto()
         {
             InitializeComponent();
         }
 
-     
+        public void Limpiar() {
+            txtPrecio.Text = "";
+            txtProducto.Text = "";
+            dgwProductos.DataSource = null;
+        }
+        private void btnGrabar_Click(object sender, EventArgs e)
+        {
+            Producto producto = new Producto
+            {
+                Nombre = txtProducto.Text,
+                Precio = Convert.ToDouble(txtPrecio.Text),
+                Categoria = Convert.ToString(cbCategoria.SelectedItem)
+            };
+            listaProductos.Add(producto);
+            Limpiar();
+            dgwProductos.DataSource = listaProductos;
+        }
+
+      
     }
 }
